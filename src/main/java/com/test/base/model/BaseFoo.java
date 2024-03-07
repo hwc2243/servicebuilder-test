@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 
+import com.test.model.Bar;
 @Entity
 public class BaseFoo extends AbstractBaseEntity
 {
@@ -39,12 +40,12 @@ public class BaseFoo extends AbstractBaseEntity
     this.b = b;
   }
 
-  public BaseBar getBar ()
+  public Bar getBar ()
   {
-    return this.bar;
+    return (Bar)this.bar;
   }
   
-  public void setBar (BaseBar bar)
+  public void setBar (Bar bar)
   {
     this.bar = bar;
   }
