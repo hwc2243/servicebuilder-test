@@ -12,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.test.base.service.ServiceException;
 import com.test.model.Bar;
 import com.test.model.Foo;
+import com.test.model.SubBar;
 import com.test.model.SubFoo;
 
 @SpringBootTest
@@ -31,6 +32,10 @@ public class FooServiceImplTest {
 	protected long cPrime = 65432;
 	protected boolean d = true;
 	protected boolean dPrime = false;
+	protected String e = "subclassed foo";
+	protected String ePrime = "another subclassed foo";
+	protected double f = 135.7;
+	protected double fPrime = 7.531;
 
 	// create
 	@Test
@@ -248,7 +253,7 @@ public class FooServiceImplTest {
 	}
 	
 	@Test
-	public void whenBarUpdated_thenFooShouldUpdate () {
+	public void whenBarUpdated_thenFooShouldReflectUpdate () {
 		try
 		{
 			Bar newBar = barService.create(newBar());
@@ -276,21 +281,43 @@ public class FooServiceImplTest {
 	@Test
 	public void whenFooSubclassed_thenSubClassShouldSave ()
 	{
-		SubFoo subFoo = new SubFoo();
-		subFoo.setA(a);
-		subFoo.setB(b);
-		subFoo.setE("subclassed foo");
+		SubFoo subFoo = newSubFoo(a, b, e);
 		
 		try
 		{
 			Foo createdFoo = fooService.create(subFoo);
 			assertThat(createdFoo.getClass()).isEqualTo(SubFoo.class);
+			
+			SubFoo createdSubFoo = (SubFoo)createdFoo;
+			assertThat(createdSubFoo.getE()).isEqualTo(e);
 		}
 		catch (ServiceException ex)
 		{
 			
 		}
+	}
+	
+	// Bar subclass
+	@Test
+	public void whenBarSubclassed_thenSubClassShouldSave ()
+	{
+		SubBar subBar = newSubBar(c, d, f);
 		
+		try
+		{
+			Bar createdBar = barService.create(subBar);
+			Foo foo = newFoo();
+			foo.setBar(createdBar);
+			
+			Foo createdFoo = fooService.create(foo);
+			Bar fromFoo = createdFoo.getBar();
+			assertThat(fromFoo.getClass()).isEqualTo(SubBar.class);
+			
+		}
+		catch (ServiceException ex)
+		{
+			ex.printStackTrace();
+		}
 	}
 	
 	protected Foo newFoo ()
@@ -306,6 +333,16 @@ public class FooServiceImplTest {
 		return foo;
 	}
 	
+	protected SubFoo newSubFoo (long a, String b, String e)
+	{
+		SubFoo foo = new SubFoo();
+		foo.setA(a);
+		foo.setB(b);
+		foo.setE(e);
+		
+		return foo;
+	}
+	
 	protected Bar newBar ()
 	{
 		return newBar(c, d);
@@ -317,6 +354,16 @@ public class FooServiceImplTest {
 
 		bar.setC(c);
 		bar.setD(d);
+		
+		return bar;
+	}
+	
+	protected SubBar newSubBar (long c, boolean d, double f)
+	{
+		SubBar bar = new SubBar();
+		bar.setC(c);
+		bar.setD(d);
+		bar.setF(f);
 		
 		return bar;
 	}
