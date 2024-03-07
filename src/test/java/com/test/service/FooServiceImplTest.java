@@ -10,11 +10,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.test.base.service.ServiceException;
+import com.test.model.Bar;
 import com.test.model.Foo;
+import com.test.model.SubFoo;
 
 @SpringBootTest
 public class FooServiceImplTest {
 
+	@Autowired
+	protected BarService barService;
+	
 	@Autowired
 	protected FooService fooService;
 	
@@ -22,6 +27,10 @@ public class FooServiceImplTest {
 	protected long aPrime = 23456;
 	protected String b = "This is a test";
 	protected String bPrime = "This is another test";
+	protected long c = 54321;
+	protected long cPrime = 65432;
+	protected boolean d = true;
+	protected boolean dPrime = false;
 
 	// create
 	@Test
@@ -216,6 +225,74 @@ public class FooServiceImplTest {
 			
 		}
 	}
+	
+	// Bar
+	@Test
+	public void whenCreatedWithBar_thenBarShouldExist () {
+		try
+		{
+			Bar newBar = barService.create(newBar());
+			Foo newFoo = newFoo();
+			newFoo.setBar(newBar);
+			
+			Foo createdFoo = fooService.create(newFoo);
+			assertThat(createdFoo.getBar()).isNotNull();
+			assertThat(createdFoo.getBar().getId()).isEqualTo(newBar.getId());
+			assertThat(createdFoo.getBar().getC()).isEqualTo(c);
+			assertThat(createdFoo.getBar().getD()).isEqualTo(d);
+		}
+		catch (ServiceException ex)
+		{
+			ex.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void whenBarUpdated_thenFooShouldUpdate () {
+		try
+		{
+			Bar newBar = barService.create(newBar());
+			Foo newFoo = newFoo();
+			newFoo.setBar(newBar);
+			
+			Foo createdFoo = fooService.create(newFoo);
+			
+			newBar.setC(cPrime);
+			newBar.setD(dPrime);
+			barService.update(newBar);
+			
+			Foo fromDb = fooService.get(createdFoo.getId());
+			
+			assertThat(fromDb.getBar().getC()).isEqualTo(cPrime);
+			assertThat(fromDb.getBar().getD()).isEqualTo(dPrime);
+		}
+		catch (ServiceException ex)
+		{
+			
+		}
+	}
+	
+	// Foo subclass
+	@Test
+	public void whenFooSubclassed_thenSubClassShouldSave ()
+	{
+		SubFoo subFoo = new SubFoo();
+		subFoo.setA(a);
+		subFoo.setB(b);
+		subFoo.setE("subclassed foo");
+		
+		try
+		{
+			Foo createdFoo = fooService.create(subFoo);
+			assertThat(createdFoo.getClass()).isEqualTo(SubFoo.class);
+		}
+		catch (ServiceException ex)
+		{
+			
+		}
+		
+	}
+	
 	protected Foo newFoo ()
 	{
 		return newFoo(a, b);
@@ -227,5 +304,20 @@ public class FooServiceImplTest {
 		foo.setA(a);
 		foo.setB(b);
 		return foo;
+	}
+	
+	protected Bar newBar ()
+	{
+		return newBar(c, d);
+	}
+	
+	protected Bar newBar (long c, boolean d)
+	{
+		Bar bar = new Bar();
+
+		bar.setC(c);
+		bar.setD(d);
+		
+		return bar;
 	}
 }

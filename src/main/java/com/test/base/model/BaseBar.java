@@ -2,6 +2,8 @@ package com.test.base.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class BaseBar extends AbstractBaseEntity
@@ -22,7 +24,7 @@ public class BaseBar extends AbstractBaseEntity
   {
     this.c = c;
   }
-  
+
   public boolean getD ()
   {
     return this.d;
@@ -32,5 +34,5 @@ public class BaseBar extends AbstractBaseEntity
   {
     this.d = d;
   }
-  
+
 }

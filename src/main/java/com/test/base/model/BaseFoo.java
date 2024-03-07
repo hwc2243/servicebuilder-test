@@ -2,6 +2,8 @@ package com.test.base.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class BaseFoo extends AbstractBaseEntity
@@ -12,6 +14,10 @@ public class BaseFoo extends AbstractBaseEntity
   @Column
   protected String b;
 
+  @OneToOne
+  @JoinColumn(name= "bar_id", nullable=true)
+  protected BaseBar bar;
+  
 
   public long getA ()
   {
@@ -22,7 +28,7 @@ public class BaseFoo extends AbstractBaseEntity
   {
     this.a = a;
   }
-  
+
   public String getB ()
   {
     return this.b;
@@ -32,5 +38,15 @@ public class BaseFoo extends AbstractBaseEntity
   {
     this.b = b;
   }
+
+  public BaseBar getBar ()
+  {
+    return this.bar;
+  }
   
+  public void setBar (BaseBar bar)
+  {
+    this.bar = bar;
+  }
+
 }
