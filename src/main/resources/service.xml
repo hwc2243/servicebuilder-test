@@ -1,11 +1,14 @@
 <service name="test" package="com.test">
 
+<!--
+ # Entities for ManyToOne relationship
+ -->
   <entity name="foo">
   	<attribute name="a" type="long"/>
   	<attribute name="b" type="String"/>
-  	<attribute name="bar" type="entity" entity-name="bar"/> 
-
-	<finder>
+  	<attribute name="bar" type="entity" relationship="many_to_one" entity-name="bar"/> 
+  	
+  	<finder>
   		<finder-column name="a" />
   	</finder>
   	
@@ -18,5 +21,17 @@
   <entity name="bar">
   	<attribute name="c" type="long"/>
   	<attribute name="d" type="boolean"/>
+  </entity>
+  
+<!--
+ # Entities for OneToOne relationship unidirectional
+-->
+  <entity name="oneToOneOwnerUnidirectional">
+  	<attribute name="a" type="long"/>
+  	<attribute name="oneToOneOwnedUnidirection" type="entity" relationship="one_to_one" entity-name="oneToOneOwnedUnidirectional"/>
+  </entity>
+  
+  <entity name="oneToOneOwnedUnidirectional">
+  	<attribute name="b" type="String"/>
   </entity>
 </service>
