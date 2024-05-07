@@ -13,17 +13,16 @@ import jakarta.persistence.OneToOne;
 
 import java.util.List;
 
-import com.test.model.OneToOneOwnedUnidirectional;
+import com.test.model.OneToOneBidirectionalBar;
 
 @Entity
-public class BaseOneToOneOwnerUnidirectional extends AbstractBaseEntity
+public class BaseOneToOneBidirectionalFoo extends AbstractBaseEntity
 {
   @Column
   protected long a;
 
-  @OneToOne(cascade=CascadeType.ALL)
-  @JoinColumn(name= "oneToOneOwnedUnidirection_id", nullable=true)
-  protected BaseOneToOneOwnedUnidirectional oneToOneOwnedUnidirection;
+  @OneToOne(mappedBy = "oneToOneBidirectionalFoo", cascade = CascadeType.ALL, orphanRemoval = true, fetch=FetchType.LAZY)
+  protected BaseOneToOneBidirectionalBar oneToOneBidirectionalBar;
   
 
   public long getA ()
@@ -36,14 +35,14 @@ public class BaseOneToOneOwnerUnidirectional extends AbstractBaseEntity
     this.a = a;
   }
 
-  public OneToOneOwnedUnidirectional getOneToOneOwnedUnidirection ()
+  public OneToOneBidirectionalBar getOneToOneBidirectionalBar ()
   {
-    return (OneToOneOwnedUnidirectional)this.oneToOneOwnedUnidirection;
+    return (OneToOneBidirectionalBar)this.oneToOneBidirectionalBar;
   }
   
-  public void setOneToOneOwnedUnidirection (OneToOneOwnedUnidirectional oneToOneOwnedUnidirection)
+  public void setOneToOneBidirectionalBar (OneToOneBidirectionalBar oneToOneBidirectionalBar)
   {
-    this.oneToOneOwnedUnidirection = oneToOneOwnedUnidirection;
+    this.oneToOneBidirectionalBar = oneToOneBidirectionalBar;
   }
 
 }
