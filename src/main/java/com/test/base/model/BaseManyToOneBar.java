@@ -15,20 +15,33 @@ import java.util.List;
 
 
 @Entity
-public class BaseOneToOneOwnedUnidirectional extends AbstractBaseEntity
+public class BaseManyToOneBar extends AbstractBaseEntity
 {
   @Column
-  protected String b;
+  protected long c;
+
+  @Column
+  protected boolean d;
 
 
-  public String getB ()
+  public long getC ()
   {
-    return this.b;
+    return this.c;
   }
   
-  public void setB (String b)
+  public void setC (long c)
   {
-    this.b = b;
+    this.c = c;
+  }
+
+  public boolean getD ()
+  {
+    return this.d;
+  }
+  
+  public void setD (boolean d)
+  {
+    this.d = d;
   }
 
 }

@@ -13,13 +13,31 @@ import jakarta.persistence.OneToOne;
 
 import java.util.List;
 
+import com.test.model.ManyToOneBar;
 
 @Entity
-public class BaseOneToOneOwnedUnidirectional extends AbstractBaseEntity
+public class BaseManyToOneFoo extends AbstractBaseEntity
 {
+  @Column
+  protected long a;
+
   @Column
   protected String b;
 
+  @ManyToOne
+  @JoinColumn(name= "manyToOneBarId", nullable=true)
+  protected BaseManyToOneBar manyToOneBar;
+
+
+  public long getA ()
+  {
+    return this.a;
+  }
+  
+  public void setA (long a)
+  {
+    this.a = a;
+  }
 
   public String getB ()
   {
@@ -29,6 +47,16 @@ public class BaseOneToOneOwnedUnidirectional extends AbstractBaseEntity
   public void setB (String b)
   {
     this.b = b;
+  }
+
+  public ManyToOneBar getManyToOneBar ()
+  {
+    return (ManyToOneBar)this.manyToOneBar;
+  }
+  
+  public void setManyToOneBar (ManyToOneBar manyToOneBar)
+  {
+    this.manyToOneBar = manyToOneBar;
   }
 
 }
