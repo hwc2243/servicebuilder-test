@@ -1,6 +1,17 @@
 <service name="test" package="com.test">
 
 <!--
+ # Entity for basic functionality testing
+-->
+	<entity name="foo" persistence="false">
+		<attribute name="a" type="long" />
+	</entity>
+	
+	<entity name="bar" persistence="false">
+		<attribute name="bar" type="String" />
+	</entity>
+	
+<!--
  # Entities for OneToOne unidirectional relationship
 -->
 	<entity name="oneToOneOwnerUnidirectional">
@@ -64,4 +75,18 @@
 		<attribute name="d" type="boolean" />
 	</entity>
 
+<!--
+ # Entities for ManyToMany relationship
+-->
+	<entity name="manyToManyFoo">
+		<attribute name="a" type="long"/>
+		<attribute name="manyToManyBars" type="entity" entity-name="manyToManyBar"
+			relationship="many_to_many"/>
+	</entity>
+	
+	<entity name="manyToManyBar">
+		<attribute name = "b" type="String"/>
+		<attribute name="manyToManyFoos" type="entity" entity-name="manyToManyFoo"
+			relationship="many_to_many" mapped-by="manyToManyBars"/>
+    </entity>
 </service>
