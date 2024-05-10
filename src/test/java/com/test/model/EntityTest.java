@@ -11,9 +11,9 @@ public class EntityTest {
 	@Test
 	public void whenTwoFoosWithSameId_thenEqualityOperationsShouldPass ()
 	{
-		Foo foo1 = new Foo();
+		BasicFoo foo1 = new BasicFoo();
 		foo1.setId(1);
-		Foo foo2 = new Foo();
+		BasicFoo foo2 = new BasicFoo();
 		foo2.setId(1);
 		
 		assertThat(foo1).isEqualTo(foo2);
@@ -23,9 +23,9 @@ public class EntityTest {
 	@Test
 	public void whenTwoFoosWithDifferentId_thenEqualityOperationsShouldFail ()
 	{
-		Foo foo1 = new Foo();
+		BasicFoo foo1 = new BasicFoo();
 		foo1.setId(1);
-		Foo foo2 = new Foo();
+		BasicFoo foo2 = new BasicFoo();
 		foo2.setId(2);
 		
 		assertThat(foo1).isNotEqualTo(foo2);
@@ -35,11 +35,23 @@ public class EntityTest {
 	@Test
 	public void whenFooAndBarWithSameId_thenEqualityOperationsShouldFail ()
 	{
-		Foo foo = new Foo();
+		BasicFoo foo = new BasicFoo();
 		foo.setId(1);
-		Bar bar = new Bar();
+		BasicBar bar = new BasicBar();
 		bar.setId(1);
 		
 		assertThat(foo).isNotEqualTo(bar);
+	}
+	
+	@Test
+	public void whenFooSubclassed_thenEqualityOperationsShouldFail ()
+	{
+		BasicFoo basicFoo = new BasicFoo();
+		basicFoo.setId(1);
+		SubBasicFoo subFoo = new SubBasicFoo();
+		subFoo.setId(1);
+		
+		assertThat(basicFoo).isNotEqualTo(subFoo);
+		assertThat(basicFoo.hashCode()).isEqualTo(subFoo.hashCode());
 	}
 }

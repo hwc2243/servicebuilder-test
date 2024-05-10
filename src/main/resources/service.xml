@@ -1,14 +1,21 @@
 <service name="test" package="com.test">
 
 <!--
- # Entity for basic functionality testing
+ # Entities for basic functionality testing
 -->
-	<entity name="foo" persistence="false">
+	<entity name="basicFoo" persistence="false">
 		<attribute name="a" type="long" />
 	</entity>
 	
-	<entity name="bar" persistence="false">
+	<entity name="basicBar" persistence="false">
 		<attribute name="bar" type="String" />
+	</entity>
+	
+<!--
+ # Entities for service testing
+-->
+	<entity name="foo">
+		<attribute name="a" type="long" />
 	</entity>
 	
 <!--
