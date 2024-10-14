@@ -1,10 +1,14 @@
 package com.test.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
+import jakarta.persistence.Table;
 
-import com.test.base.model.BaseBasicFoo;
+import com.test.model.base.BaseBasicFoo;
 
 @Entity
-public class BasicFoo extends BaseBasicFoo
+@Table (name="basicFoo")
+public class BasicFoo extends BaseBasicFoo<BasicFoo>
 {
 }

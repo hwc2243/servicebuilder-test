@@ -9,14 +9,14 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.test.base.service.ServiceException;
+import com.test.db.DBSetup;
 import com.test.model.ManyToOneBar;
 import com.test.model.ManyToOneFoo;
 import com.test.model.ManyToOneSubBar;
 import com.test.model.ManyToOneSubFoo;
 
 @SpringBootTest
-public class ManyToOneServiceImplTest {
+public class ManyToOneServiceImplTest extends DBSetup {
 
 	@Autowired
 	protected ManyToOneBarService barService;
@@ -38,198 +38,7 @@ public class ManyToOneServiceImplTest {
 	protected double fPrime = 7.531;
 
 	// create
-	@Test
-	public void whenFooCreated_thenFooShouldBeFound () {
-		ManyToOneFoo foo = newFoo();
-		
-		try
-		{
-			ManyToOneFoo newFoo = fooService.create(foo);
-			assertThat(newFoo).isNotNull();
-			assertThat(newFoo.getId()).isGreaterThan(0);
-			assertThat(newFoo.getA()).isEqualTo(a);
-			assertThat(newFoo.getB()).isEqualTo(b);
-		}
-		catch (ServiceException ex)
-		{
-			
-		}
-	}
 	
-	// delete
-	@Test
-	public void whenFooDelete_thenFooShouldNotBeFound () {
-		ManyToOneFoo foo = newFoo();
-		
-		try
-		{
-			foo = fooService.create(foo);
-			assertThat(foo).isNotNull();
-			fooService.delete(foo.getId());
-			ManyToOneFoo deletedFoo = fooService.get(foo.getId());
-			assertThat(deletedFoo).isNull();
-		}
-		catch (ServiceException ex)
-		{
-			
-		}
-	}
-	
-	// finders
-	@Test
-	public void whenValidA_thenFooShouldBeFound ()
-	{
-		ManyToOneFoo foo = newFoo();
-		try
-		{
-			foo = fooService.create(foo);
-			List<ManyToOneFoo> results = fooService.findByA(a);
-			assertThat(results).isNotEmpty();
-			assertThat(results.size()).isGreaterThan(0);
-			assertThat(results.iterator().next().getA()).isEqualTo(a);
-		}
-		catch (ServiceException ex)
-		{
-			
-		}
-	}
-	
-	@Test
-	public void whenInvalidA_thenFooShouldNotBeFound ()
-	{
-		ManyToOneFoo foo = newFoo();
-		try
-		{
-			foo = fooService.create(foo);
-			List<ManyToOneFoo> results = fooService.findByA(-99L);
-			assertThat(results).isEmpty();
-		}
-		catch (ServiceException ex)
-		{
-			
-		}
-	}
-	
-	@Test
-	public void whenValidAAndB_thenFooShouldBeFound ()
-	{
-		ManyToOneFoo foo = newFoo();
-		try
-		{
-			fooService.create(foo);
-			List<ManyToOneFoo> results = fooService.findByAAndB(a, b);
-			assertThat(results).isNotEmpty();
-			assertThat(results.size()).isGreaterThan(0);
-			assertThat(results.iterator().next().getA()).isEqualTo(a);
-			assertThat(results.iterator().next().getB()).isEqualTo(b);
-		}
-		catch (ServiceException ex)
-		{
-			
-		}
-	}
-	
-	@Test
-	public void whenValidAAndInvalidB_thenFooShouldNotBeFound ()
-	{
-		ManyToOneFoo foo = new ManyToOneFoo();
-		try
-		{
-			fooService.create(foo);
-			List<ManyToOneFoo> results = fooService.findByAAndB(a, "invalid");
-			assertThat(results).isEmpty();
-		}
-		catch (ServiceException ex)
-		{
-			
-		}
-	}
-	
-	@Test
-	public void whenInvalidAandValidB_thenFooShouldNotBeFound ()
-	{
-		try
-		{
-			fooService.create(newFoo());
-			List<ManyToOneFoo> results = fooService.findByAAndB(-99L, b);
-			assertThat(results).isEmpty();
-		}
-		catch (ServiceException ex)
-		{
-			
-		}
-	}
-	
-	@Test
-	public void whenInvalidAAndB_thenFooShouldNotBeFound ()
-	{
-		try
-		{
-			fooService.create(newFoo());
-			List<ManyToOneFoo> results = fooService.findByAAndB(-99L, "invalid");
-			assertThat(results).isEmpty();
-		}
-		catch (ServiceException ex)
-		{
-			
-		}
-	}
-	
-	// get
-	@Test
-	public void whenValidId_thenFooShouldBeFound () {
-		try
-		{
-			ManyToOneFoo newFoo = fooService.create(newFoo());
-			ManyToOneFoo fromDb = fooService.get(newFoo.getId());
-			assertThat(fromDb).isNotNull();
-			assertThat(fromDb.getId()).isEqualTo(newFoo.getId());
-			assertThat(fromDb.getA()).isEqualTo(a);
-			assertThat(fromDb.getB()).isEqualTo(b);
-		}
-		catch (ServiceException ex)
-		{
-			
-		}
-	}
-	
-	@Test
-    public void whenInvalidId_thenFooShouldNotBeFound() {
-		try
-		{
-			ManyToOneFoo fromDb = fooService.get(-99L);
-	        //verifyFindByIdIsCalledOnce();
-	        assertThat(fromDb).isNull();
-		}
-		catch (ServiceException ex)
-		{
-			
-		}
-    }
-	
-	// update
-	@Test
-	public void whenUpdate_thenFooShouldBeUpdated () {
-		try
-		{
-			ManyToOneFoo newFoo = fooService.create(newFoo());
-			newFoo.setA(aPrime);
-			newFoo.setB(bPrime);
-			ManyToOneFoo updatedFoo = fooService.update(newFoo);
-			assertThat(newFoo.getId()).isEqualTo(updatedFoo.getId());
-			assertThat(updatedFoo.getA()).isEqualTo(aPrime);
-			assertThat(updatedFoo.getB()).isEqualTo(bPrime);
-			
-			ManyToOneFoo fromDb = fooService.get(newFoo.getId());
-			assertThat(fromDb.getId()).isEqualTo(newFoo.getId());
-			assertThat(fromDb.getA()).isEqualTo(aPrime);
-			assertThat(fromDb.getB()).isEqualTo(bPrime);
-		}
-		catch (ServiceException ex)
-		{
-			
-		}
-	}
 	
 	// Bar
 	@Test

@@ -10,12 +10,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.test.base.model.BaseOneToManyBar;
+import com.test.db.DBSetup;
 import com.test.model.OneToManyBar;
 import com.test.model.OneToManyFoo;
 
 @SpringBootTest
-public class OneToManyServiceImplTest {
+public class OneToManyServiceImplTest extends DBSetup {
 	public static final long a = 12345;
 	public static final String b1 = "this is b1";
 	public static final String b2 = "this is b2";
@@ -35,14 +35,14 @@ public class OneToManyServiceImplTest {
 			newBar1.setOneToManyFoo(newFoo);
 			OneToManyBar newBar2 = newBar2();
 			newBar2.setOneToManyFoo(newFoo);
-			List<BaseOneToManyBar> newBars = Arrays.asList(newBar1, newBar2);
+			List<OneToManyBar> newBars = Arrays.asList(newBar1, newBar2);
 			newFoo.setOneToManyBars(newBars);
 			
 			// test that foo is created and has the bar entities
 			OneToManyFoo createdFoo = fooService.create(newFoo);
 			assertThat(createdFoo).isNotNull();
 			assertThat(createdFoo.getId()).isGreaterThan(0);
-			List<BaseOneToManyBar> createdBars = createdFoo.getOneToManyBars();
+			List<OneToManyBar> createdBars = createdFoo.getOneToManyBars();
 			assertThat(createdBars).isNotNull();
 			assertThat(createdBars.size()).isEqualTo(newBars.size());
 		});
@@ -55,7 +55,7 @@ public class OneToManyServiceImplTest {
 			OneToManyFoo newFoo = newFooBars();
 			
 			OneToManyFoo createdFoo = fooService.create(newFoo);
-			List<BaseOneToManyBar> createdBars = createdFoo.getOneToManyBars();
+			List<OneToManyBar> createdBars = createdFoo.getOneToManyBars();
 			createdBars.stream().forEach(createdBar -> {
 				assertDoesNotThrow(() -> {
 					OneToManyBar foundBar = barService.get(createdBar.getId());
@@ -74,7 +74,7 @@ public class OneToManyServiceImplTest {
 			OneToManyFoo newFoo = newFooBars();
 			
 			OneToManyFoo createdFoo = fooService.create(newFoo);
-			List<BaseOneToManyBar> createdBars = createdFoo.getOneToManyBars();
+			List<OneToManyBar> createdBars = createdFoo.getOneToManyBars();
 			createdBars.stream().forEach(createdBar -> {
 				assertThat(createdBar.getId()).isNotNull();
 				assertThat(createdBar.getOneToManyFoo()).isNotNull();
@@ -111,7 +111,7 @@ public class OneToManyServiceImplTest {
 		newBar1.setOneToManyFoo(newFoo);
 		OneToManyBar newBar2 = newBar2();
 		newBar2.setOneToManyFoo(newFoo);
-		List<BaseOneToManyBar> newBars = Arrays.asList(newBar1, newBar2);
+		List<OneToManyBar> newBars = Arrays.asList(newBar1, newBar2);
 		newFoo.setOneToManyBars(newBars);
 		
 		

@@ -18,6 +18,7 @@
 		<java.version>17</java.version>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
+		<servicebuilder.version>0.3.2-SNAPSHOT</servicebuilder.version>
 	</properties>
 
 	<dependencies>
@@ -28,6 +29,10 @@
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
 		</dependency>
 
 		<dependency>
@@ -46,7 +51,7 @@
 			<plugin>
 				<groupId>com.github.hwc2243</groupId>
 				<artifactId>servicebuilder-maven-plugin</artifactId>
-				<version>0.0.1-SNAPSHOT</version>
+				<version>${servicebuilder.version}</version>
 				<executions>
 					<execution>
 						<phase>generate-sources</phase>

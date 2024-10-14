@@ -3,17 +3,17 @@ package com.test.service;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.test.base.service.ServiceException;
+import com.test.db.DBSetup;
 import com.test.model.OneToOneOwnedUnidirectional;
 import com.test.model.OneToOneOwnerUnidirectional;
 
+
 @SpringBootTest
-public class OneToOneUnidirectionalServiceImplTest {
+public class OneToOneUnidirectionalServiceImplTest extends DBSetup {
 
 	protected long a = 789;
 	protected String b = "Some test data";
@@ -28,13 +28,13 @@ public class OneToOneUnidirectionalServiceImplTest {
 	public void whenOneToOneOwnerCreatedWithOwned_thenOneToOneOwnedFound ()
 	{
 		OneToOneOwnerUnidirectional oneToOneOwnerUnidirectional = oneToOneOwnerUnidirectional();
-		oneToOneOwnerUnidirectional.setOneToOneOwnedUnidirection(oneToOneOwnedUnidirectional());
+		oneToOneOwnerUnidirectional.setOneToOneOwnedUnidirectional(oneToOneOwnedUnidirectional());
 		
 		assertDoesNotThrow(() -> {
 			OneToOneOwnerUnidirectional ownerCreated = oneToOneOwnerService.create(oneToOneOwnerUnidirectional);
 			assertThat(ownerCreated).isNotNull();
 			assertThat(ownerCreated.getId()).isGreaterThan(0);
-			OneToOneOwnedUnidirectional ownedCreated = ownerCreated.getOneToOneOwnedUnidirection();
+			OneToOneOwnedUnidirectional ownedCreated = ownerCreated.getOneToOneOwnedUnidirectional();
 			assertThat(ownedCreated).isNotNull();
 			assertThat(ownedCreated.getId()).isGreaterThan(0);
 			
@@ -47,12 +47,12 @@ public class OneToOneUnidirectionalServiceImplTest {
 	public void whenOneToOneOwnerDelete_thenOneToOneOwnedDeleted ()
 	{
 		OneToOneOwnerUnidirectional oneToOneOwnerUnidirectional = oneToOneOwnerUnidirectional();
-		oneToOneOwnerUnidirectional.setOneToOneOwnedUnidirection(oneToOneOwnedUnidirectional());
+		oneToOneOwnerUnidirectional.setOneToOneOwnedUnidirectional(oneToOneOwnedUnidirectional());
 
 		assertDoesNotThrow(() -> {
 			OneToOneOwnerUnidirectional created = oneToOneOwnerService.create(oneToOneOwnerUnidirectional);
 			long createdOwnerId = created.getId();
-			long createdOwnedId = created.getOneToOneOwnedUnidirection().getId();
+			long createdOwnedId = created.getOneToOneOwnedUnidirectional().getId();
 			oneToOneOwnerService.delete(createdOwnerId);
 			
 			OneToOneOwnerUnidirectional found = oneToOneOwnerService.get(createdOwnerId);

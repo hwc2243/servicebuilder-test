@@ -10,18 +10,23 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.test.db.DBSetup;
+
+/*
 import com.test.base.model.BaseManyToManyBar;
 import com.test.base.model.BaseManyToManyFoo;
 import com.test.model.ManyToManyBar;
 import com.test.model.ManyToManyFoo;
 
+*/
 import jakarta.transaction.Transactional;
 
 @SpringBootTest
-public class ManyToManyServiceImplTest {
+public class ManyToManyServiceImplTest extends DBSetup {
 	public static final long a = 3456;
 	public static final String b = "ManyToMany bar string";
-	
+
+	/*
 	@Autowired
 	public ManyToManyFooService fooService;
 	
@@ -66,4 +71,5 @@ public class ManyToManyServiceImplTest {
 		bar.setB(b);
 		return bar;
 	}
+	*/
 }

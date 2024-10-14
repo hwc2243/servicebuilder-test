@@ -1,6 +1,6 @@
 package com.test.service;
 
-import com.test.base.service.BaseManyToOneFooService;
+import com.test.service.base.BaseManyToOneFooService;
 
 import com.test.model.ManyToOneFoo;
 

@@ -2,7 +2,7 @@ package com.test.service;
 
 import org.springframework.stereotype.Service;
 
-import com.test.base.service.BaseOneToOneOwnerUnidirectionalServiceImpl;
+import com.test.service.base.BaseOneToOneOwnerUnidirectionalServiceImpl;
 
 import com.test.model.OneToOneOwnerUnidirectional;
 

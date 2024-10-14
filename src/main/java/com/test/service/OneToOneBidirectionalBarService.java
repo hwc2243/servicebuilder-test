@@ -1,6 +1,6 @@
 package com.test.service;
 
-import com.test.base.service.BaseOneToOneBidirectionalBarService;
+import com.test.service.base.BaseOneToOneBidirectionalBarService;
 
 import com.test.model.OneToOneBidirectionalBar;
 
