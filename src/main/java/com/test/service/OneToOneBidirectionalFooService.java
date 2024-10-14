@@ -1,6 +1,6 @@
 package com.test.service;
 
-import com.test.base.service.BaseOneToOneBidirectionalFooService;
+import com.test.service.base.BaseOneToOneBidirectionalFooService;
 
 import com.test.model.OneToOneBidirectionalFoo;
 

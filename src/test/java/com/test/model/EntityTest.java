@@ -5,8 +5,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.test.db.DBSetup;
+
 @SpringBootTest
-public class EntityTest {
+public class EntityTest extends DBSetup {
 
 	@Test
 	public void whenTwoFoosWithSameId_thenEqualityOperationsShouldPass ()

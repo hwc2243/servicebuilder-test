@@ -1,7 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <service name="test" package="com.test">
 
 <!--
- # Entities for basic functionality testing
+ # Entities for basic functionality testing with no persistence
 -->
 	<entity name="basicFoo" persistence="false">
 		<attribute name="a" type="long" />
@@ -10,12 +11,38 @@
 	<entity name="basicBar" persistence="false">
 		<attribute name="bar" type="String" />
 	</entity>
-	
-<!--
+
+<!--	
  # Entities for service testing
--->
+ -->
 	<entity name="foo">
 		<attribute name="a" type="long" />
+		<attribute name="b" type="String" />
+
+		<finder>
+			<finder-column name="a" />
+		</finder>
+
+		<finder>
+			<finder-column name="a" />
+			<finder-column name="b" />
+		</finder>
+		
+	</entity>
+	
+<!--
+ # Entities for sub classing functionality testing
+-->
+	<entity name="parentFoo" abstract="true">
+		<attribute name="a" type="long"/>
+	</entity>
+	
+	<entity name="childBar" parent="parentFoo">
+		<attribute name="b" type="String"/>
+	</entity>
+	
+	<entity name="childBaz" parent="parentFoo">
+		<attribute name="c" type="boolean"/>
 	</entity>
 	
 <!--
@@ -23,35 +50,36 @@
 -->
 	<entity name="oneToOneOwnerUnidirectional">
 		<attribute name="a" type="long" />
-		<attribute name="oneToOneOwnedUnidirection" type="entity"
-			entity-name="oneToOneOwnedUnidirectional" relationship="one_to_one" />
+		
+		<related name="oneToOneOwnedUnidirectional" entity="oneToOneOwnedUnidirectional" relationship="one_to_one"/>
 	</entity>
 
 	<entity name="oneToOneOwnedUnidirectional">
 		<attribute name="b" type="String" />
 	</entity>
 
+
 <!--
  # Entities for OneToOne bidirectional relationship
 -->
 	<entity name="oneToOneBidirectionalFoo">
 		<attribute name="a" type="long" />
-		<attribute name="oneToOneBidirectionalBar" type="entity"
-			entity-name="oneToOneBidirectionalBar" relationship="one_to_one"
-			bidirectional="true" />
+		
+		<related name="oneToOneBidirectionalBar" entity="oneToOneBidirectionalBar" relationship="one_to_one" bidirectional="true"/>
 	</entity>
 
 	<entity name="oneToOneBidirectionalBar">
 		<attribute name="b" type="String" />
 	</entity>
 
+
 <!--
  # Entities for OneToMany relationship
 -->
 	<entity name="oneToManyFoo">
 		<attribute name="a" type="long" />
-		<attribute name="oneToManyBars" type="entity" entity-name="oneToManyBar"
-			relationship="one_to_many" />
+		
+		<related name="oneToManyBars" entity="oneToManyBar" relationship="one_to_many" />
 	</entity>
 	
 	<entity name="oneToManyBar">
@@ -64,8 +92,8 @@
 	<entity name="manyToOneFoo">
 		<attribute name="a" type="long" />
 		<attribute name="b" type="String" />
-		<attribute name="manyToOneBar" type="entity" entity-name="manyToOneBar"
-			relationship="many_to_one" />
+		
+		<related name="manyToOneBar" entity="manyToOneBar" relationship="many_to_one" />
 
 		<finder>
 			<finder-column name="a" />
@@ -82,18 +110,21 @@
 		<attribute name="d" type="boolean" />
 	</entity>
 
+
 <!--
  # Entities for ManyToMany relationship
--->
+
 	<entity name="manyToManyFoo">
 		<attribute name="a" type="long"/>
-		<attribute name="manyToManyBars" type="entity" entity-name="manyToManyBar"
-			relationship="many_to_many"/>
+		
+		<related name="manyToManyBars" entity="manyToManyBar" relationship="many_to_many" />
 	</entity>
 	
 	<entity name="manyToManyBar">
 		<attribute name = "b" type="String"/>
-		<attribute name="manyToManyFoos" type="entity" entity-name="manyToManyFoo"
-			relationship="many_to_many" mapped-by="manyToManyBars"/>
+		
+		<related name="manyToManyFoos", entity="manyToManyFoo" relationship="many_to_many" mapped-by="manyToManyBars" />
     </entity>
+-->
+
 </service>

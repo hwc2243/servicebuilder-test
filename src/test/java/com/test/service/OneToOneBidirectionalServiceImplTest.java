@@ -7,14 +7,15 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.test.db.DBSetup;
 import com.test.model.OneToOneBidirectionalBar;
 import com.test.model.OneToOneBidirectionalFoo;
 
 @SpringBootTest
-public class OneToOneBidirectionalServiceImplTest {
+public class OneToOneBidirectionalServiceImplTest extends DBSetup {
 	public static final long a = 12345;
 	public static final String b = "this is b";
-	
+
 	@Autowired
 	protected OneToOneBidirectionalFooService fooService;
 	

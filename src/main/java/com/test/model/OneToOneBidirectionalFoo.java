@@ -1,10 +1,14 @@
 package com.test.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
+import jakarta.persistence.Table;
 
-import com.test.base.model.BaseOneToOneBidirectionalFoo;
+import com.test.model.base.BaseOneToOneBidirectionalFoo;
 
 @Entity
-public class OneToOneBidirectionalFoo extends BaseOneToOneBidirectionalFoo
+@Table (name="oneToOneBidirectionalFoo")
+public class OneToOneBidirectionalFoo extends BaseOneToOneBidirectionalFoo<OneToOneBidirectionalFoo>
 {
 }

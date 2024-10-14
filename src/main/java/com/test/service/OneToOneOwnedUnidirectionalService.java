@@ -1,6 +1,6 @@
 package com.test.service;
 
-import com.test.base.service.BaseOneToOneOwnedUnidirectionalService;
+import com.test.service.base.BaseOneToOneOwnedUnidirectionalService;
 
 import com.test.model.OneToOneOwnedUnidirectional;
 

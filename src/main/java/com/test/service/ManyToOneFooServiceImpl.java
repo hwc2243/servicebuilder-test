@@ -2,7 +2,7 @@ package com.test.service;
 
 import org.springframework.stereotype.Service;
 
-import com.test.base.service.BaseManyToOneFooServiceImpl;
+import com.test.service.base.BaseManyToOneFooServiceImpl;
 
 import com.test.model.ManyToOneFoo;
 

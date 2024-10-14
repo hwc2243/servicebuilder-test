@@ -1,6 +1,6 @@
 package com.test.service;
 
-import com.test.base.service.BaseManyToOneBarService;
+import com.test.service.base.BaseManyToOneBarService;
 
 import com.test.model.ManyToOneBar;
 
