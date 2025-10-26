@@ -25,11 +25,6 @@ import java.util.Set;
 import com.test.model.ChildBar;
 import com.test.model.ParentFoo;
 
-
-/*
-@Entity
-@Table (name="childBar")
-*/
 @MappedSuperclass
 public abstract class BaseChildBar<T extends BaseChildBar> extends ParentFoo<T>
     implements Serializable
@@ -48,4 +43,5 @@ public abstract class BaseChildBar<T extends BaseChildBar> extends ParentFoo<T>
   {
     this.b = b;
   }
+
 }

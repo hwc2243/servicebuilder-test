@@ -25,11 +25,6 @@ import java.util.Set;
 import com.test.model.OneToOneOwnerUnidirectional;
 import com.test.model.OneToOneOwnedUnidirectional;
 
-
-/*
-@Entity
-@Table (name="oneToOneOwnerUnidirectional")
-*/
 @MappedSuperclass
 public abstract class BaseOneToOneOwnerUnidirectional<T extends BaseOneToOneOwnerUnidirectional> extends AbstractBaseEntity
     implements Serializable
@@ -52,6 +47,7 @@ public abstract class BaseOneToOneOwnerUnidirectional<T extends BaseOneToOneOwne
   {
     this.a = a;
   }
+
   public OneToOneOwnedUnidirectional getOneToOneOwnedUnidirectional ()
   {
     return (OneToOneOwnedUnidirectional)this.oneToOneOwnedUnidirectional;
@@ -61,5 +57,6 @@ public abstract class BaseOneToOneOwnerUnidirectional<T extends BaseOneToOneOwne
   {
     this.oneToOneOwnedUnidirectional = oneToOneOwnedUnidirectional;
   }
+
 
 }

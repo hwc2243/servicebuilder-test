@@ -25,11 +25,6 @@ import java.util.Set;
 import com.test.model.ManyToOneFoo;
 import com.test.model.ManyToOneBar;
 
-
-/*
-@Entity
-@Table (name="manyToOneFoo")
-*/
 @MappedSuperclass
 public abstract class BaseManyToOneFoo<T extends BaseManyToOneFoo> extends AbstractBaseEntity
     implements Serializable
@@ -55,6 +50,7 @@ public abstract class BaseManyToOneFoo<T extends BaseManyToOneFoo> extends Abstr
   {
     this.a = a;
   }
+
   public String getB ()
   {
     return this.b;
@@ -64,6 +60,7 @@ public abstract class BaseManyToOneFoo<T extends BaseManyToOneFoo> extends Abstr
   {
     this.b = b;
   }
+
   public ManyToOneBar getManyToOneBar ()
   {
     return (ManyToOneBar)this.manyToOneBar;
@@ -73,5 +70,6 @@ public abstract class BaseManyToOneFoo<T extends BaseManyToOneFoo> extends Abstr
   {
     this.manyToOneBar = manyToOneBar;
   }
+
 
 }

@@ -24,11 +24,6 @@ import java.util.Set;
 
 import com.test.model.ManyToOneBar;
 
-
-/*
-@Entity
-@Table (name="manyToOneBar")
-*/
 @MappedSuperclass
 public abstract class BaseManyToOneBar<T extends BaseManyToOneBar> extends AbstractBaseEntity
     implements Serializable
@@ -50,6 +45,7 @@ public abstract class BaseManyToOneBar<T extends BaseManyToOneBar> extends Abstr
   {
     this.c = c;
   }
+
   public boolean getD ()
   {
     return this.d;
@@ -59,4 +55,5 @@ public abstract class BaseManyToOneBar<T extends BaseManyToOneBar> extends Abstr
   {
     this.d = d;
   }
+
 }

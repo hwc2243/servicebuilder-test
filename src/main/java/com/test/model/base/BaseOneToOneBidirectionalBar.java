@@ -25,11 +25,6 @@ import java.util.Set;
 import com.test.model.OneToOneBidirectionalBar;
 import com.test.model.OneToOneBidirectionalFoo;
 
-
-/*
-@Entity
-@Table (name="oneToOneBidirectionalBar")
-*/
 @MappedSuperclass
 public abstract class BaseOneToOneBidirectionalBar<T extends BaseOneToOneBidirectionalBar> extends AbstractBaseEntity
     implements Serializable
@@ -52,6 +47,7 @@ public abstract class BaseOneToOneBidirectionalBar<T extends BaseOneToOneBidirec
   {
     this.b = b;
   }
+
   public OneToOneBidirectionalFoo getOneToOneBidirectionalFoo ()
   {
     return (OneToOneBidirectionalFoo)this.oneToOneBidirectionalFoo;
@@ -61,5 +57,6 @@ public abstract class BaseOneToOneBidirectionalBar<T extends BaseOneToOneBidirec
   {
     this.oneToOneBidirectionalFoo = oneToOneBidirectionalFoo;
   }
+
 
 }

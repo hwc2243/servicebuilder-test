@@ -24,11 +24,6 @@ import java.util.Set;
 
 import com.test.model.BasicFoo;
 
-
-/*
-@Entity
-@Table (name="basicFoo")
-*/
 @MappedSuperclass
 public abstract class BaseBasicFoo<T extends BaseBasicFoo> extends AbstractBaseEntity
     implements Serializable
@@ -47,4 +42,5 @@ public abstract class BaseBasicFoo<T extends BaseBasicFoo> extends AbstractBaseE
   {
     this.a = a;
   }
+
 }

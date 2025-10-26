@@ -25,11 +25,6 @@ import java.util.Set;
 import com.test.model.ChildBaz;
 import com.test.model.ParentFoo;
 
-
-/*
-@Entity
-@Table (name="childBaz")
-*/
 @MappedSuperclass
 public abstract class BaseChildBaz<T extends BaseChildBaz> extends ParentFoo<T>
     implements Serializable
@@ -48,4 +43,5 @@ public abstract class BaseChildBaz<T extends BaseChildBaz> extends ParentFoo<T>
   {
     this.c = c;
   }
+
 }

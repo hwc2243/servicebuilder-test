@@ -24,12 +24,6 @@ import java.util.Set;
 
 import com.test.model.ParentFoo;
 
-
-/*
-@Entity
-@Table (name="parentFoo")
-@Inheritance(strategy = InheritanceType.JOINED)
-*/
 @MappedSuperclass
 public abstract class BaseParentFoo<T extends BaseParentFoo> extends AbstractBaseEntity
     implements Serializable
@@ -48,4 +42,5 @@ public abstract class BaseParentFoo<T extends BaseParentFoo> extends AbstractBas
   {
     this.a = a;
   }
+
 }
